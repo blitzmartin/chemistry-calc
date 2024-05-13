@@ -13,6 +13,7 @@
     "email": "joaopaulomoraes@outlook.com"
   },
   "scripts": {
+    "start": "npm run dev",
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
