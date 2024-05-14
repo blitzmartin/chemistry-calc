@@ -1,14 +1,10 @@
+import { SearchableSelectOption } from '@/lib/types'
 import { calculateAtomicMass } from '@/lib/utils'
 import { Button } from '@/shared'
 import { PageContainer } from '@/shared/PageContainer'
 import { produce } from 'immer'
 import { useState } from 'react'
 import { MoleculeUnit } from './components/MoleculeUnit'
-
-export type SearchableSelectOption = {
-  counter: number
-  symbol: string
-}
 
 export const Home = () => {
   const [formDataList, setFormDataList] = useState<SearchableSelectOption[]>([

@@ -1,7 +1,7 @@
-import { SearchableSelectOption } from '@/pages/home'
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { periodicTableElements } from './constants'
+import { SearchableSelectOption } from './types'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))

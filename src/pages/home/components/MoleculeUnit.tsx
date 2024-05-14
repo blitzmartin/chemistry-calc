@@ -1,6 +1,6 @@
 import { periodicTableElements } from '@/lib/constants'
+import { SearchableSelectOption } from '@/lib/types'
 import { Button, Input, Label, SearchableSelect } from '@/shared'
-import { SearchableSelectOption } from '../Home'
 
 export type MoleculeUnitProps = {
   formData: SearchableSelectOption

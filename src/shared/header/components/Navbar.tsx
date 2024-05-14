@@ -1,5 +1,6 @@
 import { PhList, PhMoon, PhSun } from '@/icons'
-import { NavbarLink, navbarLinks } from '@/lib/constants'
+import { navbarLinks } from '@/lib/constants'
+import { NavbarLink } from '@/lib/types'
 import { useColorPreference } from '@/providers/ColorPreferenceProvider'
 import {
   DropdownMenu,
