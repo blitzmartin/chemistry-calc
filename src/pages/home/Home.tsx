@@ -1,14 +1,14 @@
 import { elements } from '@/lib/constants'
+import { Button } from '@/shared'
 import { PageContainer } from '@/shared/PageContainer'
 import { produce } from 'immer'
 import { useState } from 'react'
 import { MoleculeUnit } from './components/MoleculeUnit'
 
 export const Home = () => {
-  const [formData, setFormData] = useState({
-    counter: 1,
-    selectedElement: ''
-  })
+  const [formDataList, setFormDataList] = useState([
+    { counter: 1, selectedElement: '' }
+  ])
 
   const elementOptions = elements
     .sort((a, b) => a.symbol.localeCompare(b.symbol))
@@ -17,41 +17,59 @@ export const Home = () => {
       label: el.symbol
     }))
 
-  const increaseCounter = () => {
-    setFormData(
+  const increaseCounter = (index: number) => {
+    setFormDataList(
       produce((draft) => {
-        draft.counter++
+        draft[index].counter++
       })
     )
   }
 
-  const decreaseCounter = () => {
-    if (formData.counter > 1) {
-      setFormData(
+  const decreaseCounter = (index: number) => {
+    if (formDataList[index].counter > 1) {
+      setFormDataList(
         produce((draft) => {
-          draft.counter--
+          draft[index].counter--
         })
       )
     }
   }
 
-  const handleElementSelect = (value: string) => {
-    setFormData(
+  const handleElementSelect = (index: number, value: string) => {
+    setFormDataList(
       produce((draft) => {
-        draft.selectedElement = value
+        draft[index].selectedElement = value
       })
     )
   }
 
+  const addMoleculeUnit = () => {
+    setFormDataList((prevList) => [
+      ...prevList,
+      { counter: 1, selectedElement: '' }
+    ])
+  }
+
+  const handleReset = () => {
+    setFormDataList([{ counter: 1, selectedElement: '' }])
+  }
+
   return (
     <PageContainer title="Calculator">
-      <MoleculeUnit
-        formData={formData}
-        decreaseCounter={decreaseCounter}
-        increaseCounter={increaseCounter}
-        elementOptions={elementOptions}
-        handleElementSelect={(value) => handleElementSelect(value)}
-      />
+      <div className="flex flex-col gap-4">
+        {formDataList.map((formData, index) => (
+          <MoleculeUnit
+            key={index}
+            formData={formData}
+            decreaseCounter={() => decreaseCounter(index)}
+            increaseCounter={() => increaseCounter(index)}
+            elementOptions={elementOptions}
+            handleElementSelect={(value) => handleElementSelect(index, value)}
+          />
+        ))}
+        <Button onClick={addMoleculeUnit}>Add Molecule Unit</Button>
+        <Button onClick={handleReset}>Reset</Button>
+      </div>
     </PageContainer>
   )
 }
