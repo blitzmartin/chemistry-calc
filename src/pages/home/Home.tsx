@@ -1,21 +1,20 @@
-import { elements } from '@/lib/constants'
+import { calculateAtomicMass } from '@/lib/utils'
 import { Button } from '@/shared'
 import { PageContainer } from '@/shared/PageContainer'
 import { produce } from 'immer'
 import { useState } from 'react'
 import { MoleculeUnit } from './components/MoleculeUnit'
 
-export const Home = () => {
-  const [formDataList, setFormDataList] = useState([
-    { counter: 1, selectedElement: '' }
-  ])
+export type SearchableSelectOption = {
+  counter: number
+  symbol: string
+}
 
-  const elementOptions = elements
-    .sort((a, b) => a.symbol.localeCompare(b.symbol))
-    .map((el) => ({
-      value: el.symbol,
-      label: el.symbol
-    }))
+export const Home = () => {
+  const [formDataList, setFormDataList] = useState<SearchableSelectOption[]>([
+    { counter: 1, symbol: '' }
+  ])
+  const [result, setResult] = useState(0)
 
   const increaseCounter = (index: number) => {
     setFormDataList(
@@ -38,20 +37,17 @@ export const Home = () => {
   const handleElementSelect = (index: number, value: string) => {
     setFormDataList(
       produce((draft) => {
-        draft[index].selectedElement = value
+        draft[index].symbol = value
       })
     )
   }
 
   const addMoleculeUnit = () => {
-    setFormDataList((prevList) => [
-      ...prevList,
-      { counter: 1, selectedElement: '' }
-    ])
+    setFormDataList((prevList) => [...prevList, { counter: 1, symbol: '' }])
   }
 
   const handleReset = () => {
-    setFormDataList([{ counter: 1, selectedElement: '' }])
+    setFormDataList([{ counter: 1, symbol: '' }])
   }
 
   return (
@@ -63,12 +59,12 @@ export const Home = () => {
             formData={formData}
             decreaseCounter={() => decreaseCounter(index)}
             increaseCounter={() => increaseCounter(index)}
-            elementOptions={elementOptions}
             handleElementSelect={(value) => handleElementSelect(index, value)}
           />
         ))}
         <Button onClick={addMoleculeUnit}>Add Molecule Unit</Button>
         <Button onClick={handleReset}>Reset</Button>
+        <div>Result: {calculateAtomicMass(formDataList)}</div>
       </div>
     </PageContainer>
   )

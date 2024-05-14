@@ -57,7 +57,7 @@ export type PeriodicTableElement = {
   block: string
 }
 
-export const elements = [
+export const periodicTableElements = [
   {
     name: 'Hydrogen',
     appearance: 'colorless gas',

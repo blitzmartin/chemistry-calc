@@ -1,10 +1,11 @@
+import { periodicTableElements } from '@/lib/constants'
 import { Button, Input, Label, SearchableSelect } from '@/shared'
+import { SearchableSelectOption } from '../Home'
 
 export type MoleculeUnitProps = {
-  formData: { counter: number; selectedElement: string }
+  formData: SearchableSelectOption
   decreaseCounter: () => void
   increaseCounter: () => void
-  elementOptions: { value: string; label: string }[]
   handleElementSelect: (value: string) => void
 }
 
@@ -12,9 +13,14 @@ export const MoleculeUnit = ({
   formData,
   decreaseCounter,
   increaseCounter,
-  elementOptions,
   handleElementSelect
 }: MoleculeUnitProps) => {
+  const mappedElementOptions = periodicTableElements
+    .sort((a, b) => a.symbol.localeCompare(b.symbol))
+    .map((el) => ({
+      value: el.symbol,
+      label: el.symbol
+    }))
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
@@ -33,8 +39,8 @@ export const MoleculeUnit = ({
         <div className="flex flex-col gap-2">
           <Label>El</Label>
           <SearchableSelect
-            options={elementOptions}
-            value={formData.selectedElement}
+            options={mappedElementOptions}
+            value={formData.symbol}
             onSelect={handleElementSelect}
             placeholder="Select"
           />
