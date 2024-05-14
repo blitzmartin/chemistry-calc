@@ -63,7 +63,7 @@ export const Home = () => {
             <img
               src={elementObj.image.url || ''}
               alt={elementObj.name || ''}
-              className="size-24 rounded-full border-2 border-gray-600 object-cover"
+              className="size-24 rounded-full border-2 border-gray-500 object-cover"
             />
           )}
         </div>
