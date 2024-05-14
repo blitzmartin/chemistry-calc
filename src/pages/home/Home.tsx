@@ -1,3 +1,4 @@
+import { elements } from '@/lib/constants'
 import { Button, Input, Label, SearchableSelect } from '@/shared'
 import { PageContainer } from '@/shared/PageContainer'
 import { useState } from 'react'
@@ -5,6 +6,12 @@ import { useState } from 'react'
 export const Home = () => {
   const [counter, setCounter] = useState(1)
   const [selectedElement, setSelectedElement] = useState('')
+  const elementOptions = elements
+    .sort((a, b) => a.symbol.localeCompare(b.symbol))
+    .map((el) => ({
+      value: el.symbol,
+      label: el.symbol
+    }))
 
   const increaseCounter = () => {
     setCounter((prevCounter) => prevCounter + 1)
@@ -34,9 +41,10 @@ export const Home = () => {
         <div className="flex flex-col gap-2">
           <Label>El</Label>
           <SearchableSelect
-            options={selectOptions}
+            options={elementOptions}
             value={selectedElement}
             onSelect={(value) => setSelectedElement(value)}
+            placeholder="Select"
           />
         </div>
       </div>

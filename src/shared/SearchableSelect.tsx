@@ -58,7 +58,7 @@ export const SearchableSelect = ({
           size={size || 'md'}
         >
           {selectedOptionLabel || placeholder}
-          <PhCaretDown className="size-4 ml-2 shrink-0 opacity-50" />
+          <PhCaretDown className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent align={align} className="h-fit p-0">
@@ -119,7 +119,7 @@ export const SearchableMultiSelect = ({
                   <Badge key={option.value}>{option.label}</Badge>
                 ))}
           </div>
-          <PhCaretDown className="size-4 ml-2 shrink-0 opacity-50" />
+          <PhCaretDown className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent align={align} className="h-48 p-0">
