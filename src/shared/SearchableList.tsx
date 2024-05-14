@@ -98,9 +98,9 @@ export const SearchableList = ({
         onValueChange={setSearch}
         placeholder={inputPlaceholder || 'Search...'}
       />
-      <CommandEmpty>{renderOnEmpty || 'Not found'}</CommandEmpty>
-      <CommandGroup className="hide-scrollbar overflow-scroll">
-        <CommandList>
+      <CommandList>
+        <CommandEmpty>{renderOnEmpty || 'Not found'}</CommandEmpty>
+        <CommandGroup className="hide-scrollbar overflow-scroll">
           {options.map((option) => (
             <CommandItem
               key={option.value}
@@ -125,8 +125,8 @@ export const SearchableList = ({
               {option.label}
             </CommandItem>
           ))}
-        </CommandList>
-      </CommandGroup>
+        </CommandGroup>
+      </CommandList>
     </Command>
   )
 }
@@ -221,9 +221,9 @@ export const SearchableListMulti = ({
         onValueChange={setSearch}
         placeholder={inputPlaceholder || 'Search...'}
       />
-      <CommandEmpty>{renderOnEmpty || 'Not found'}</CommandEmpty>
-      <CommandGroup className="hide-scrollbar overflow-scroll">
-        <CommandList>
+      <CommandList>
+        <CommandEmpty>{renderOnEmpty || 'Not found'}</CommandEmpty>
+        <CommandGroup className="hide-scrollbar overflow-scroll">
           {options.map((option) => (
             <CommandItem
               key={option.value}
@@ -246,8 +246,8 @@ export const SearchableListMulti = ({
               {option.label}
             </CommandItem>
           ))}
-        </CommandList>
-      </CommandGroup>
+        </CommandGroup>
+      </CommandList>
     </Command>
   )
 }

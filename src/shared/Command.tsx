@@ -38,7 +38,7 @@ const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
           >
             {children}
           </Command>
-          <DialogPrimitive.Close className="focus:ring-high-contrast data-[state=open]:text-description absolute right-4 top-[18px] rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none data-[state=open]:bg-accent">
+          <DialogPrimitive.Close className="absolute right-4 top-[18px] rounded-sm opacity-70 transition-opacity hover:opacity-50 focus:outline-none focus:ring-secondary disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-primary">
             <PhXBold className="size-4 opacity-80" />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
@@ -52,7 +52,7 @@ const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
-  <div className="border-chip-border flex items-center border-b px-3">
+  <div className="flex items-center border-b border-foreground px-3">
     <PhMagnifyingGlass className="mr-2 size-4 shrink-0 opacity-50" />
     <CommandPrimitive.Input
       ref={ref}
@@ -73,7 +73,10 @@ const CommandList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.List
     ref={ref}
-    className={cn('max-h-[300px] overflow-y-auto overflow-x-hidden', className)}
+    className={cn(
+      'max-h-[300px] overflow-y-auto overflow-x-hidden ',
+      className
+    )}
     {...props}
   />
 ))
@@ -128,7 +131,8 @@ const CommandItem = React.forwardRef<
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[selected]:bg-card-background data-[selected]:text-color data-[disabled]:opacity-50',
+      'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50',
+      className,
       className
     )}
     {...props}
