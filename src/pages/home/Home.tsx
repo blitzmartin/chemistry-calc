@@ -14,7 +14,7 @@ export const Home = () => {
   const [formDataList, setFormDataList] = useState<SearchableSelectOption[]>([
     { counter: 1, symbol: '' }
   ])
-  const [result, setResult] = useState(0)
+  const noElementSelected = formDataList[formDataList.length - 1].symbol === ''
 
   const increaseCounter = (index: number) => {
     setFormDataList(
@@ -51,7 +51,7 @@ export const Home = () => {
   }
 
   return (
-    <PageContainer title="Calculator">
+    <PageContainer title="Atomic Mass Calculator">
       <div className="flex flex-col gap-4">
         {formDataList.map((formData, index) => (
           <MoleculeUnit
@@ -62,7 +62,9 @@ export const Home = () => {
             handleElementSelect={(value) => handleElementSelect(index, value)}
           />
         ))}
-        <Button onClick={addMoleculeUnit}>Add Molecule Unit</Button>
+        <Button disabled={noElementSelected} onClick={addMoleculeUnit}>
+          {noElementSelected ? 'Please select element' : 'Add Molecule Unit'}
+        </Button>
         <Button onClick={handleReset}>Reset</Button>
         <div>Result: {calculateAtomicMass(formDataList)}</div>
       </div>
