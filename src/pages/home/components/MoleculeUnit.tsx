@@ -29,7 +29,12 @@ export const MoleculeUnit = ({
           <Label>Atoms</Label>
           <Input value={formData.counter} readOnly className="w-16" />
           <div className="flex gap-1">
-            <Button size="icon" variant="ghost" onClick={decreaseCounter}>
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={decreaseCounter}
+              disabled={formData.counter === 1}
+            >
               <PhMinus className="text-primary" />
             </Button>
             <Button size="icon" variant="ghost" onClick={increaseCounter}>
