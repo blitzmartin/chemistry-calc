@@ -31,7 +31,6 @@ export const Home = () => {
       setCounter((prevCounter) => prevCounter - 1)
     }
   }
-  console.log(elements)
 
   return (
     <PageContainer title="Calculator">
