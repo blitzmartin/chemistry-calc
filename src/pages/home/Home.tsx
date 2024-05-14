@@ -34,34 +34,36 @@ export const Home = () => {
 
   return (
     <PageContainer title="Calculator">
-      <div className="flex gap-4">
-        <div className="flex flex-col gap-2">
-          <Label>Atoms</Label>
-          <Input value={counter} readOnly className="w-16" />
-          <div className="flex gap-1">
-            <Button size="icon" onClick={decreaseCounter}>
-              -
-            </Button>
-            <Button size="icon" onClick={increaseCounter}>
-              +
-            </Button>
+      <div className="flex flex-col gap-4">
+        <div className="flex gap-4">
+          <div className="flex flex-col gap-2">
+            <Label>Atoms</Label>
+            <Input value={counter} readOnly className="w-16" />
+            <div className="flex gap-1">
+              <Button size="icon" onClick={decreaseCounter}>
+                -
+              </Button>
+              <Button size="icon" onClick={increaseCounter}>
+                +
+              </Button>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label>El</Label>
-          <SearchableSelect
-            options={elementOptions}
-            value={selectedElement}
-            onSelect={(value) => setSelectedElement(value)}
-            placeholder="Select"
-          />
+          <div className="flex flex-col gap-2">
+            <Label>El</Label>
+            <SearchableSelect
+              options={elementOptions}
+              value={selectedElement}
+              onSelect={(value) => setSelectedElement(value)}
+              placeholder="Select"
+            />
+          </div>
         </div>
         <div>
           {elementObj && (
             <img
               src={elementObj.image.url || ''}
               alt={elementObj.name || ''}
-              className="size-32 rounded-md object-cover"
+              className="size-24 rounded-full border-2 border-gray-600 object-cover"
             />
           )}
         </div>
@@ -69,22 +71,3 @@ export const Home = () => {
     </PageContainer>
   )
 }
-
-export const selectOptions = [
-  {
-    value: 'Oxygen',
-    label: 'Oxygen'
-  },
-  {
-    value: 'Hydrogen',
-    label: 'Hydrogen'
-  },
-  {
-    value: 'Tungsten',
-    label: 'Tungsten'
-  },
-  {
-    value: 'Nitrogen',
-    label: 'Nitrogen'
-  }
-]
