@@ -1,3 +1,4 @@
+import { PhMinus, PhPlus } from '@/icons'
 import { periodicTableElements } from '@/lib/constants'
 import { SearchableSelectOption } from '@/lib/types'
 import { Button, Input, Label, SearchableSelect } from '@/shared'
@@ -28,16 +29,16 @@ export const MoleculeUnit = ({
           <Label>Atoms</Label>
           <Input value={formData.counter} readOnly className="w-16" />
           <div className="flex gap-1">
-            <Button size="icon" onClick={decreaseCounter}>
-              -
+            <Button size="icon" variant="ghost" onClick={decreaseCounter}>
+              <PhMinus className="text-card-foreground" />
             </Button>
-            <Button size="icon" onClick={increaseCounter}>
-              +
+            <Button size="icon" variant="ghost" onClick={increaseCounter}>
+              <PhPlus className="text-primary" />
             </Button>
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <Label>El</Label>
+          <Label>Element</Label>
           <SearchableSelect
             options={mappedElementOptions}
             value={formData.symbol}

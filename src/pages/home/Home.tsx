@@ -1,6 +1,6 @@
 import { SearchableSelectOption } from '@/lib/types'
 import { calculateAtomicMass } from '@/lib/utils'
-import { Button } from '@/shared'
+import { Button, Input, Label } from '@/shared'
 import { PageContainer } from '@/shared/PageContainer'
 import { produce } from 'immer'
 import { useState } from 'react'
@@ -62,7 +62,8 @@ export const Home = () => {
           {noElementSelected ? 'Please select element' : 'Add Molecule Unit'}
         </Button>
         <Button onClick={handleReset}>Reset</Button>
-        <div>Result: {calculateAtomicMass(formDataList)}</div>
+        <Label>Result:</Label>
+        <Input value={calculateAtomicMass(formDataList)} readOnly />
       </div>
     </PageContainer>
   )

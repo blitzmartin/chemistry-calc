@@ -50,12 +50,12 @@ export const SearchableSelect = ({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant={variant || 'secondary'}
+          variant={variant || 'outline'}
           role="combobox"
           aria-expanded={open}
           className="justify-between"
           data-testid={testId ?? ''}
-          size={size || 'md'}
+          size={size || 'sm'}
         >
           {selectedOptionLabel || placeholder}
           <PhCaretDown className="ml-2 size-4 shrink-0 opacity-50" />
