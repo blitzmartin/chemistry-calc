@@ -1,12 +1,14 @@
-import { PeriodicTableElement, elements } from '@/lib/constants'
-import { Button, Input, Label, SearchableSelect } from '@/shared'
+import { elements } from '@/lib/constants'
 import { PageContainer } from '@/shared/PageContainer'
-import { useEffect, useState } from 'react'
+import { produce } from 'immer'
+import { useState } from 'react'
+import { MoleculeUnit } from './components/MoleculeUnit'
 
 export const Home = () => {
-  const [counter, setCounter] = useState(1)
-  const [selectedElement, setSelectedElement] = useState('')
-  const [elementObj, setElementObj] = useState<PeriodicTableElement | null>()
+  const [formData, setFormData] = useState({
+    counter: 1,
+    selectedElement: ''
+  })
 
   const elementOptions = elements
     .sort((a, b) => a.symbol.localeCompare(b.symbol))
@@ -15,59 +17,41 @@ export const Home = () => {
       label: el.symbol
     }))
 
-  useEffect(() => {
-    const selected = elements.find((el) => el.symbol === selectedElement)
-    if (selected) {
-      setElementObj(selected)
-    }
-  }, [selectedElement])
-
   const increaseCounter = () => {
-    setCounter((prevCounter) => prevCounter + 1)
+    setFormData(
+      produce((draft) => {
+        draft.counter++
+      })
+    )
   }
 
   const decreaseCounter = () => {
-    if (counter > 1) {
-      setCounter((prevCounter) => prevCounter - 1)
+    if (formData.counter > 1) {
+      setFormData(
+        produce((draft) => {
+          draft.counter--
+        })
+      )
     }
+  }
+
+  const handleElementSelect = (value: string) => {
+    setFormData(
+      produce((draft) => {
+        draft.selectedElement = value
+      })
+    )
   }
 
   return (
     <PageContainer title="Calculator">
-      <div className="flex flex-col gap-4">
-        <div className="flex gap-4">
-          <div className="flex flex-col gap-2">
-            <Label>Atoms</Label>
-            <Input value={counter} readOnly className="w-16" />
-            <div className="flex gap-1">
-              <Button size="icon" onClick={decreaseCounter}>
-                -
-              </Button>
-              <Button size="icon" onClick={increaseCounter}>
-                +
-              </Button>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label>El</Label>
-            <SearchableSelect
-              options={elementOptions}
-              value={selectedElement}
-              onSelect={(value) => setSelectedElement(value)}
-              placeholder="Select"
-            />
-          </div>
-        </div>
-        <div>
-          {elementObj && (
-            <img
-              src={elementObj.image.url || ''}
-              alt={elementObj.name || ''}
-              className="size-24 rounded-full border-2 border-gray-600 object-cover"
-            />
-          )}
-        </div>
-      </div>
+      <MoleculeUnit
+        formData={formData}
+        decreaseCounter={decreaseCounter}
+        increaseCounter={increaseCounter}
+        elementOptions={elementOptions}
+        handleElementSelect={(value) => handleElementSelect(value)}
+      />
     </PageContainer>
   )
 }
