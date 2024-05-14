@@ -1,9 +1,10 @@
-import { Button, Input, Label } from '@/shared'
+import { Button, Input, Label, SearchableSelect } from '@/shared'
 import { PageContainer } from '@/shared/PageContainer'
 import { useState } from 'react'
 
 export const Home = () => {
   const [counter, setCounter] = useState(1)
+  const [selectedElement, setSelectedElement] = useState('')
 
   const increaseCounter = () => {
     setCounter((prevCounter) => prevCounter + 1)
@@ -32,9 +33,32 @@ export const Home = () => {
         </div>
         <div className="flex flex-col gap-2">
           <Label>El</Label>
-          <Input value={counter} readOnly className="w-16" />
+          <SearchableSelect
+            options={selectOptions}
+            value={selectedElement}
+            onSelect={(value) => setSelectedElement(value)}
+          />
         </div>
       </div>
     </PageContainer>
   )
 }
+
+export const selectOptions = [
+  {
+    value: 'Oxygen',
+    label: 'Oxygen'
+  },
+  {
+    value: 'Hydrogen',
+    label: 'Hydrogen'
+  },
+  {
+    value: 'Tungsten',
+    label: 'Tungsten'
+  },
+  {
+    value: 'Nitrogen',
+    label: 'Nitrogen'
+  }
+]

@@ -7,7 +7,8 @@ import {
   CommandEmpty,
   CommandGroup,
   CommandInput,
-  CommandItem
+  CommandItem,
+  CommandList
 } from './Command'
 
 export type SearchableListProps =
@@ -99,30 +100,32 @@ export const SearchableList = ({
       />
       <CommandEmpty>{renderOnEmpty || 'Not found'}</CommandEmpty>
       <CommandGroup className="hide-scrollbar overflow-scroll">
-        {options.map((option) => (
-          <CommandItem
-            key={option.value}
-            value={option.label}
-            onSelect={() => handleSelection(option.value)}
-            aria-selected={shouldIconBeVisible(option.value)}
-          >
-            {showCheckbox && (
-              <div
-                className={cn(
-                  'mr-2 flex size-3 shrink-0 items-center justify-center rounded-[3px] border border-color ring-offset-background',
-                  {
-                    'border-link text-link': shouldIconBeVisible(option.value)
-                  }
-                )}
-              >
-                {shouldIconBeVisible(option.value) && (
-                  <PhCheckBold className="size-2" />
-                )}
-              </div>
-            )}
-            {option.label}
-          </CommandItem>
-        ))}
+        <CommandList>
+          {options.map((option) => (
+            <CommandItem
+              key={option.value}
+              value={option.label}
+              onSelect={() => handleSelection(option.value)}
+              aria-selected={shouldIconBeVisible(option.value)}
+            >
+              {showCheckbox && (
+                <div
+                  className={cn(
+                    'mr-2 flex size-3 shrink-0 items-center justify-center rounded-[3px] border border-color ring-offset-background',
+                    {
+                      'border-link text-link': shouldIconBeVisible(option.value)
+                    }
+                  )}
+                >
+                  {shouldIconBeVisible(option.value) && (
+                    <PhCheckBold className="size-2" />
+                  )}
+                </div>
+              )}
+              {option.label}
+            </CommandItem>
+          ))}
+        </CommandList>
       </CommandGroup>
     </Command>
   )
@@ -220,28 +223,30 @@ export const SearchableListMulti = ({
       />
       <CommandEmpty>{renderOnEmpty || 'Not found'}</CommandEmpty>
       <CommandGroup className="hide-scrollbar overflow-scroll">
-        {options.map((option) => (
-          <CommandItem
-            key={option.value}
-            value={option.label}
-            onSelect={() => handleSelection(option.value)}
-            aria-selected={shouldIconBeVisible(option.value)}
-          >
-            <div
-              className={cn(
-                'mr-2 flex size-3 shrink-0 items-center justify-center rounded-[3px] border border-color ring-offset-background',
-                {
-                  'border-link text-link': shouldIconBeVisible(option.value)
-                }
-              )}
+        <CommandList>
+          {options.map((option) => (
+            <CommandItem
+              key={option.value}
+              value={option.label}
+              onSelect={() => handleSelection(option.value)}
+              aria-selected={shouldIconBeVisible(option.value)}
             >
-              {shouldIconBeVisible(option.value) && (
-                <PhCheckBold className="size-2" />
-              )}
-            </div>
-            {option.label}
-          </CommandItem>
-        ))}
+              <div
+                className={cn(
+                  'mr-2 flex size-3 shrink-0 items-center justify-center rounded-[3px] border border-color ring-offset-background',
+                  {
+                    'border-link text-link': shouldIconBeVisible(option.value)
+                  }
+                )}
+              >
+                {shouldIconBeVisible(option.value) && (
+                  <PhCheckBold className="size-2" />
+                )}
+              </div>
+              {option.label}
+            </CommandItem>
+          ))}
+        </CommandList>
       </CommandGroup>
     </Command>
   )
