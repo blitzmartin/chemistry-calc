@@ -30,7 +30,7 @@ export const MoleculeUnit = ({
           <Input value={formData.counter} readOnly className="w-16" />
           <div className="flex gap-1">
             <Button size="icon" variant="ghost" onClick={decreaseCounter}>
-              <PhMinus className="text-card-foreground" />
+              <PhMinus className="text-primary" />
             </Button>
             <Button size="icon" variant="ghost" onClick={increaseCounter}>
               <PhPlus className="text-primary" />
