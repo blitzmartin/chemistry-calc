@@ -1,4 +1,4 @@
-import { CustomElement, elements } from '@/lib/constants'
+import { PeriodicTableElement, elements } from '@/lib/constants'
 import { Button, Input, Label, SearchableSelect } from '@/shared'
 import { PageContainer } from '@/shared/PageContainer'
 import { useEffect, useState } from 'react'
@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 export const Home = () => {
   const [counter, setCounter] = useState(1)
   const [selectedElement, setSelectedElement] = useState('')
-  const [elementObj, setElementObj] = useState<CustomElement | null>()
+  const [elementObj, setElementObj] = useState<PeriodicTableElement | null>()
 
   const elementOptions = elements
     .sort((a, b) => a.symbol.localeCompare(b.symbol))

@@ -17,7 +17,7 @@ export type NavbarLink = {
   route: string
 }
 
-export type CustomElement = {
+export type PeriodicTableElement = {
   name: string
   appearance: string | null
   atomic_mass: number
