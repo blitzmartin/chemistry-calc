@@ -17,26 +17,26 @@ export type NavbarLink = {
   route: string
 }
 
-export type Element = {
+export type CustomElement = {
   name: string
-  appearance: string
+  appearance: string | null
   atomic_mass: number
-  boil: number
+  boil: number | null
   category: string
-  density: number
-  discovered_by: string
-  melt: number
-  molar_heat: number
-  named_by: string
+  density: number | null
+  discovered_by: string | null
+  melt: number | null
+  molar_heat: number | null
+  named_by: string | null
   number: number
   period: number
   group: number
   phase: string
   source: string
-  bohr_model_image: string
-  bohr_model_3d: string
-  spectral_img: string
-  summery: string
+  bohr_model_image: string | null
+  bohr_model_3d: string | null
+  spectral_img: string | null
+  summery?: string
   symbol: string
   xpos: number
   ypos: number
@@ -45,11 +45,15 @@ export type Element = {
   shells: number[]
   electron_configuration: string
   electron_configuration_semantic: string
-  electron_affinity: number
-  electronegativity_pauling: number
+  electron_affinity: number | null
+  electronegativity_pauling: number | null
   ionization_energies: number[]
-  'cpk-hex': string
-  image: string
+  'cpk-hex': string | null
+  image: {
+    attribution: string
+    title: string
+    url: string
+  }
   block: string
 }
 

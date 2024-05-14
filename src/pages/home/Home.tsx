@@ -1,17 +1,26 @@
-import { elements } from '@/lib/constants'
+import { CustomElement, elements } from '@/lib/constants'
 import { Button, Input, Label, SearchableSelect } from '@/shared'
 import { PageContainer } from '@/shared/PageContainer'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const Home = () => {
   const [counter, setCounter] = useState(1)
   const [selectedElement, setSelectedElement] = useState('')
+  const [elementObj, setElementObj] = useState<CustomElement | null>()
+
   const elementOptions = elements
     .sort((a, b) => a.symbol.localeCompare(b.symbol))
     .map((el) => ({
       value: el.symbol,
       label: el.symbol
     }))
+
+  useEffect(() => {
+    const selected = elements.find((el) => el.symbol === selectedElement)
+    if (selected) {
+      setElementObj(selected)
+    }
+  }, [selectedElement])
 
   const increaseCounter = () => {
     setCounter((prevCounter) => prevCounter + 1)
@@ -22,6 +31,7 @@ export const Home = () => {
       setCounter((prevCounter) => prevCounter - 1)
     }
   }
+  console.log(elements)
 
   return (
     <PageContainer title="Calculator">
@@ -46,6 +56,15 @@ export const Home = () => {
             onSelect={(value) => setSelectedElement(value)}
             placeholder="Select"
           />
+        </div>
+        <div>
+          {elementObj && (
+            <img
+              src={elementObj.image.url || ''}
+              alt={elementObj.name || ''}
+              className="size-32 rounded-md object-cover"
+            />
+          )}
         </div>
       </div>
     </PageContainer>
