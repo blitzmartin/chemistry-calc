@@ -5,6 +5,7 @@ import { Button, Input, Label, SearchableSelect } from '@/shared'
 
 export type MoleculeUnitProps = {
   formData: SearchableSelectOption
+  onChange: (value: string) => void
   decreaseCounter: () => void
   increaseCounter: () => void
   handleElementSelect: (value: string) => void
@@ -12,6 +13,7 @@ export type MoleculeUnitProps = {
 
 export const MoleculeUnit = ({
   formData,
+  onChange,
   decreaseCounter,
   increaseCounter,
   handleElementSelect
@@ -22,12 +24,26 @@ export const MoleculeUnit = ({
       value: el.symbol,
       label: el.symbol
     }))
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
         <div className="flex flex-col gap-2">
+          <Label>Element</Label>
+          <SearchableSelect
+            options={mappedElementOptions}
+            value={formData.symbol}
+            onSelect={handleElementSelect}
+            placeholder="Select"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
           <Label>Atoms</Label>
-          <Input value={formData.counter} readOnly className="w-16" />
+          <Input
+            value={formData.counter}
+            onChange={(e) => onChange(e.target.value)}
+            className="w-16"
+          />
           <div className="flex gap-1">
             <Button
               size="icon"
@@ -41,15 +57,6 @@ export const MoleculeUnit = ({
               <PhPlus className="text-primary" />
             </Button>
           </div>
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label>Element</Label>
-          <SearchableSelect
-            options={mappedElementOptions}
-            value={formData.symbol}
-            onSelect={handleElementSelect}
-            placeholder="Select"
-          />
         </div>
       </div>
     </div>

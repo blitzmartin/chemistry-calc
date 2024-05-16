@@ -30,6 +30,16 @@ export const Home = () => {
     }
   }
 
+  const handleChange = (index: number, e: string) => {
+    const counter = parseInt(e)
+    if (counter > 0)
+      setFormDataList(
+        produce((draft) => {
+          draft[index].counter = counter
+        })
+      )
+  }
+
   const handleElementSelect = (index: number, value: string) => {
     setFormDataList(
       produce((draft) => {
@@ -53,6 +63,7 @@ export const Home = () => {
           <MoleculeUnit
             key={index}
             formData={formData}
+            onChange={(e) => handleChange(index, e)}
             decreaseCounter={() => decreaseCounter(index)}
             increaseCounter={() => increaseCounter(index)}
             handleElementSelect={(value) => handleElementSelect(index, value)}
