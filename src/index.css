@@ -5,9 +5,9 @@
 @layer base {
 :root {
     --background: #ffffff;
-    --foreground: #251d17;
+    --foreground: #211c1b;
 
-    --card: #594536;
+    --card: #6b5543;
     --card-foreground: #f0f0f2;
 
     --popover: #ffffff;
@@ -36,7 +36,7 @@
 }
 
 .dark {
-    --background: #352b2b;
+    --background: #211c1b;
     --foreground: #e6e6eb;
 
     --card: #bbb9b7;
