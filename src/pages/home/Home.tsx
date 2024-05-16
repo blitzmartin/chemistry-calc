@@ -1,3 +1,4 @@
+import { PhPlus } from '@/icons'
 import { SearchableSelectOption } from '@/lib/types'
 import { calculateAtomicMass } from '@/lib/utils'
 import { Button, Input, Label } from '@/shared'
@@ -59,33 +60,46 @@ export const Home = () => {
 
   return (
     <PageContainer title="Atomic Mass Calculator">
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-10">
         <div className="flex gap-4">
-          <div className="flex w-full flex-col gap-2">
-            <Label>Formula</Label>
-            <div className="flex h-full items-center">
-              <Formula data={formDataList} />
-            </div>
-          </div>
           <div className="flex flex-col gap-2">
             <Label>Result</Label>
             <Input value={calculateAtomicMass(formDataList)} readOnly />
           </div>
+          <div className="flex w-full flex-col gap-2">
+            <Label>Formula</Label>
+            <div className="flex h-full items-center">
+              {formDataList[0].symbol !== '' ? (
+                <Formula data={formDataList} />
+              ) : (
+                <div>...</div>
+              )}
+            </div>
+          </div>
         </div>
-        {formDataList.map((formData, index) => (
-          <MoleculeUnit
-            key={index}
-            formData={formData}
-            onChange={(e) => handleChange(index, e)}
-            decreaseCounter={() => decreaseCounter(index)}
-            increaseCounter={() => increaseCounter(index)}
-            handleElementSelect={(value) => handleElementSelect(index, value)}
-          />
-        ))}
-        <div className="flex flex-col gap-2">
-          <Button disabled={noElementSelected} onClick={addMoleculeUnit}>
-            {noElementSelected ? 'Please select element' : 'Add Molecule Unit'}
-          </Button>
+        <div className="flex flex-wrap gap-2 md:max-w-[1200px]">
+          {formDataList.map((formData, index) => (
+            <MoleculeUnit
+              key={index}
+              formData={formData}
+              onChange={(e) => handleChange(index, e)}
+              decreaseCounter={() => decreaseCounter(index)}
+              increaseCounter={() => increaseCounter(index)}
+              handleElementSelect={(value) => handleElementSelect(index, value)}
+            />
+          ))}
+          <div className="flex items-center">
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={noElementSelected}
+              onClick={addMoleculeUnit}
+            >
+              <PhPlus />
+            </Button>
+          </div>
+        </div>
+        <div className="flex">
           <Button onClick={handleReset}>Reset</Button>
         </div>
       </div>

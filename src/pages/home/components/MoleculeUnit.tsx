@@ -35,6 +35,7 @@ export const MoleculeUnit = ({
             value={formData.symbol}
             onSelect={handleElementSelect}
             placeholder="Select"
+            variant="ghost"
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -42,7 +43,7 @@ export const MoleculeUnit = ({
           <Input
             value={formData.counter}
             onChange={(e) => onChange(e.target.value)}
-            className="w-16"
+            className="w-16 border-none"
           />
           <div className="flex gap-1">
             <Button

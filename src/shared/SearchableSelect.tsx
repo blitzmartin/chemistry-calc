@@ -50,7 +50,7 @@ export const SearchableSelect = ({
           variant={variant || 'outline'}
           role="combobox"
           aria-expanded={open}
-          className="justify-between"
+          className="justify-between pl-0"
           data-testid={testId ?? ''}
           size={size || 'sm'}
         >

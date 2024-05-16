@@ -13,7 +13,7 @@ export const PageContainer = ({
   return (
     <div
       className={cn(
-        'flex gap-4 h-full w-full flex-col px-20 py-8  items-center min-h-screen',
+        'flex gap-6 h-full w-full flex-col px-20 py-8  items-center min-h-screen',
         className
       )}
     >
