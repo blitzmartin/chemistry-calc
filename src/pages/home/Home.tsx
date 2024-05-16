@@ -60,6 +60,18 @@ export const Home = () => {
   return (
     <PageContainer title="Atomic Mass Calculator">
       <div className="flex flex-col gap-6">
+        <div className="flex gap-4">
+          <div className="flex w-full flex-col gap-2">
+            <Label>Formula</Label>
+            <div className="flex h-full items-center">
+              <Formula data={formDataList} />
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label>Result</Label>
+            <Input value={calculateAtomicMass(formDataList)} readOnly />
+          </div>
+        </div>
         {formDataList.map((formData, index) => (
           <MoleculeUnit
             key={index}
@@ -75,14 +87,6 @@ export const Home = () => {
             {noElementSelected ? 'Please select element' : 'Add Molecule Unit'}
           </Button>
           <Button onClick={handleReset}>Reset</Button>
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label>Formula:</Label>
-          <Formula data={formDataList} />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label>Result:</Label>
-          <Input value={calculateAtomicMass(formDataList)} readOnly />
         </div>
       </div>
     </PageContainer>
