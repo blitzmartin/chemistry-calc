@@ -3,13 +3,10 @@ import { useState } from 'react'
 
 import { PhCaretDown } from '@/icons'
 
-import { Badge, Button } from '.'
+import { Button } from '.'
 import { Popover, PopoverContent, PopoverTrigger } from './Popover'
-import type {
-  SearchableListMultiProps,
-  SearchableListProps
-} from './SearchableList'
-import { SearchableList, SearchableListMulti } from './SearchableList'
+import type { SearchableListProps } from './SearchableList'
+import { SearchableList } from './SearchableList'
 
 export const SearchableSelect = ({
   options,
@@ -61,72 +58,11 @@ export const SearchableSelect = ({
           <PhCaretDown className="ml-2 size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent align={align} className="h-fit p-0">
+      <PopoverContent align={align} className="h-fit w-32 p-0">
         <SearchableList
           options={options}
           value={selectedValue}
           onSelect={(value) => handleSelection(value)}
-          {...rest}
-        />
-      </PopoverContent>
-    </Popover>
-  )
-}
-
-export const SearchableMultiSelect = ({
-  options,
-  placeholder,
-  initialValues,
-  values,
-  onSelect,
-  testId,
-  align = 'start',
-  ...rest
-}: {
-  placeholder?: ReactNode
-  align?: 'start' | 'center' | 'end'
-} & SearchableListMultiProps) => {
-  const [open, setOpen] = useState(false)
-
-  const [selectedValues, setSelectedValues] = useState(
-    values || initialValues || []
-  )
-  const isControlled = values !== undefined
-  const selectedState = isControlled ? values : selectedValues
-  const handleSelection = (currentValues: string[]) => {
-    setSelectedValues(currentValues)
-    onSelect(currentValues)
-  }
-
-  const selectedOptions = options.filter((option) =>
-    selectedState.includes(option.value)
-  )
-
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="secondary"
-          role="combobox"
-          aria-expanded={open}
-          data-testid={testId ?? ''}
-          className="justify-between"
-        >
-          <div className="hide-scrollbar flex w-full gap-1 overflow-scroll">
-            {selectedOptions.length === 0
-              ? placeholder
-              : selectedOptions.map((option) => (
-                  <Badge key={option.value}>{option.label}</Badge>
-                ))}
-          </div>
-          <PhCaretDown className="ml-2 size-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent align={align} className="h-48 p-0">
-        <SearchableListMulti
-          options={options}
-          values={selectedValues}
-          onSelect={(values) => handleSelection(values)}
           {...rest}
         />
       </PopoverContent>

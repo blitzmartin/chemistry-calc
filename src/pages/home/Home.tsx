@@ -4,6 +4,7 @@ import { Button, Input, Label } from '@/shared'
 import { PageContainer } from '@/shared/PageContainer'
 import { produce } from 'immer'
 import { useState } from 'react'
+import { Formula } from './components/Formula'
 import { MoleculeUnit } from './components/MoleculeUnit'
 
 export const Home = () => {
@@ -58,7 +59,7 @@ export const Home = () => {
 
   return (
     <PageContainer title="Atomic Mass Calculator">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-6">
         {formDataList.map((formData, index) => (
           <MoleculeUnit
             key={index}
@@ -69,12 +70,20 @@ export const Home = () => {
             handleElementSelect={(value) => handleElementSelect(index, value)}
           />
         ))}
-        <Button disabled={noElementSelected} onClick={addMoleculeUnit}>
-          {noElementSelected ? 'Please select element' : 'Add Molecule Unit'}
-        </Button>
-        <Button onClick={handleReset}>Reset</Button>
-        <Label>Result:</Label>
-        <Input value={calculateAtomicMass(formDataList)} readOnly />
+        <div className="flex flex-col gap-2">
+          <Button disabled={noElementSelected} onClick={addMoleculeUnit}>
+            {noElementSelected ? 'Please select element' : 'Add Molecule Unit'}
+          </Button>
+          <Button onClick={handleReset}>Reset</Button>
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label>Formula:</Label>
+          <Formula data={formDataList} />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label>Result:</Label>
+          <Input value={calculateAtomicMass(formDataList)} readOnly />
+        </div>
       </div>
     </PageContainer>
   )
